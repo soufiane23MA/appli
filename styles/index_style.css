@@ -1,0 +1,53 @@
+* {
+	margin: 0;
+	padding: 0;
+	text-decoration: none;
+}
+body{
+	background-color: rgb(238, 238, 212);
+	box-sizing: 100vh;
+
+}
+
+h1{
+	color: rgb(77, 77, 202);
+	margin-left: 10px;
+}
+.message{
+	color:rgb(209, 9, 9);
+	margin-left: 50px;
+}
+ 
+.navlinks{
+	background-color: rgb(133, 213, 228);
+	display: flex;
+	justify-content:left;
+	align-items: center;
+	margin: 5px;
+
+}
+.navlinks li {
+	display: inline-flex;
+	padding: 10px;
+
+}
+
+.form_produit input{
+	display: block;
+	margin-bottom: 5px;
+	border-radius: 5px;
+ 
+	
+}
+.form_produit label{
+	display: block;
+	color: rgb(17, 60, 116);
+	padding: 10px;
+	margin: 5px;
+}
+.submit {
+	display: block;
+	padding: 5px;
+	margin: 10px;
+	background-color: rgb(123, 218, 218);
+}
