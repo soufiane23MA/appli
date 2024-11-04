@@ -58,7 +58,7 @@ if (isset($_SESSION['products'])) {
 			"<thead>",
 			"<tr>",
 				"<th>#</th>",
-				"<th>poubelle</th>",
+				"<th>Action</th>",
 				"<th>Nom</th>",
 				"<th>Prix</th>",
 				"<th>Quantité</th>",

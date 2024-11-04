@@ -23,17 +23,17 @@ session_start();
 */
 
 
-if (isset($_POST['submit'])) {
+/*if (isset($_POST['submit'])) {
 
 $name = filter_input(INPUT_POST, "name", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 $price = filter_input(INPUT_POST, "price", FILTER_VALIDATE_FLOAT, FILTER_FLAG_ALLOW_FRACTION);
-$qtt = filter_input(INPUT_POST, "qtt", FILTER_VALIDATE_INT);
+$qtt = filter_input(INPUT_POST, "qtt", FILTER_VALIDATE_INT);*/
 
 /**
 * on mis on place une nouvelle condition pour s'assurer que les filter_input
 * ont bine fonctionnés et qu'on a belle et bien les 3 variables avec des valeurs bien nettoyées .
 */
-if ($name && $price && $qtt) {
+/*if ($name && $price && $qtt) {*/
 /**
 * aprés verification des valeurs de nos variables on les stoques dans la $_session crée
 * par PHP
@@ -41,13 +41,13 @@ if ($name && $price && $qtt) {
 * nouvelle attribut total.
 */
 
-$product =
+/*$product =
 [
 "name" => $name,
 "price" => $price,
 "qtt" => $qtt,
 "total" => $price * $qtt
-];
+];*/
 
 /**
 * cette superglobale($ _SESSION) est générer automatiquement : soit par le serveur quand l'utilisateur
@@ -57,26 +57,64 @@ $product =
 * sur d'autres pages .
 */
 
-$_SESSION['products'][] = $product;
+/*$_SESSION['products'][] = $product;
 $_SESSION['message'] = "<h3 style = 'color:black'>Votre Produit a éte rajouté   </h3>";
 }
 else{
 	$_SESSION['message'] = "<h3 style ='color: red'> Attention!! Aucun produit n'a été rajouté</h3> ";
 
 }
-};
+};/*
 /**
  * la mise enplace de la boucle Switch qui gére l'affichge selon 
  * l'action choisi par l'utilisateur
- * /**
- * en bas : la condition qui permet de suprimer le produit clické (1 seul produit)
- * je verifier que le produit existe et que le paramétre 'action' avec comme valeur (supprimer/ delete)
- *  est dans l'URL reçus par recap.php, via le lien que j'ai crée dans le tableau( index.php )
- *  je vérifie également que le paramétre 'index' exist et que c'est un entier (# de NULL)
+ * 
  */
  
 if (isset($_GET['action'])) {
 	switch ($_GET['action']) {
+		case 'add':// aprés vérification des données soumise pas l'utilisateur avec les différentes filtres
+			if (isset($_POST['name'], $_POST['price'], $_POST['qtt'])) {
+				$name = filter_input(INPUT_POST, 'name', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+				$price = filter_input(INPUT_POST, 'price', FILTER_VALIDATE_FLOAT, FILTER_FLAG_ALLOW_FRACTION);
+				$qtt = filter_input(INPUT_POST, 'qtt', FILTER_VALIDATE_INT);
+				/**
+				 * on s'assure que les filtres ont bien marchés et on verifie si le produits existe déjà ou pas
+				 * s'il existe n'existe pas dans notre tableau on le rajoute , sinon on incremente de 1 .
+				 */
+
+				if ($name && $price && $qtt) {
+					$productExists = false;
+					foreach ($_SESSION['products'] as &$product) {
+						if ($product['name'] === $name) {
+							$product['qtt'] += $qtt;
+							$product['total'] = $product['price'] * $product['qtt'];
+							$productExists = true;
+							break;
+						}
+					}
+
+					if (!$productExists) {
+						$_SESSION['products'][] = [
+							'name' => $name,
+							'price' => $price,
+							'qtt' => $qtt,
+							'total' => $price * $qtt
+						];
+					}
+
+					$_SESSION['message'] = "<h3 style='color:red'>Produit ajouté au panier.</h3>";
+				} else {
+					$_SESSION['message'] = "<h3 style='color:red'>Erreur : informations de produit manquantes ou invalides.</h3>";
+				}
+			}
+			break;
+			/**
+			 * en bas : la condition qui permet de suprimer le produit clické (1 seul produit)
+			 * je verifier que le produit existe et que le paramétre 'action' avec comme valeur (supprimer/ delete)
+			 *  est dans l'URL reçus par recap.php, via le lien que j'ai crée dans le tableau( index.php )
+			 *  je vérifie également que le paramétre 'index' exist et que c'est un entier (# de NULL)*/
+ 
 		case 'delete':
 			if (isset($_GET['action']) && $_GET['action'] == 'delete' && isset($_GET['index'])) {
 				$index = (int) $_GET['index'];

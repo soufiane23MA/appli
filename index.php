@@ -21,11 +21,11 @@ session_start();
 	<?php
 
 	$qqtGenaral = 0;
-	/*if (isset($_SESSION['products'])) {
+	if (isset($_SESSION['products'])) {
 		foreach ($_SESSION['products'] as $product) {
 			$qqtGenaral += $product['qtt'];
 		}
-	};*/
+	};
 	?>
 
 	<div class="navbare">
@@ -47,7 +47,7 @@ session_start();
 	et la methode nous informe le serveur que les informations sont récupereés
 	par un formulaire et ne pas via l'URL (methode GET)-->
 
-	<form class="form_produit" action="traitement.php" method="post">
+	<form class="form_produit" action="traitement.php?action=add" method="post">
 		<p>
 			<label>
 				Nom du produit :
