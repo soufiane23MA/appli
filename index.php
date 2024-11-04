@@ -34,16 +34,16 @@ session_start();
 				<li><a href="index.php">Accueil</a></li>
 				<li><a href="recap.php">Recap</a></li>
 				<li id="total">Total Produits :<?php echo $qqtGenaral; ?> </li>
-			<!-- crée le lien cliquable qui permet de suprimer tou les produit du tableau-->	
+				<!-- crée le lien cliquable qui permet de suprimer tou les produit du tableau-->
 				<li><a href="traitement.php?action=clear">Vider Votre Panier</a></li>
 			</ul>
 		</div>
 	</div>
 	<!--création du formulaire qui permettra de renseigner les produits-->
 	<h1>Ajouter un Produit</h1>
-	 
 
-<!-- l'attribut action permet de désignié la destination de notre formulaire
+
+	<!-- l'attribut action permet de désignié la destination de notre formulaire
 	et la methode nous informe le serveur que les informations sont récupereés
 	par un formulaire et ne pas via l'URL (methode GET)-->
 

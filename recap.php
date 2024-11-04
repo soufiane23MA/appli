@@ -55,16 +55,16 @@ if (isset($_SESSION['products'])) {
 		echo "<h3>Aucun Produits en session...</h3>";
 	} else {
 		echo "<table class='product-table'>",
-			"<thead>",
-			"<tr>",
-				"<th>#</th>",
-				"<th>Action</th>",
-				"<th>Nom</th>",
-				"<th>Prix</th>",
-				"<th>Quantité</th>",
-				"<th>Total</th>",
-			"</tr>",
-			"</thead>",
+		"<thead>",
+		"<tr>",
+		"<th>#</th>",
+		"<th>Action</th>",
+		"<th>Nom</th>",
+		"<th>Prix</th>",
+		"<th>Quantité</th>",
+		"<th>Total</th>",
+		"</tr>",
+		"</thead>",
 		"<tbody>";
 
 
@@ -78,25 +78,25 @@ if (isset($_SESSION['products'])) {
 
 		foreach ($_SESSION['products'] as $index => $product) {
 
-			echo 
-		"<tr>",
+			echo
+			"<tr>",
 			"<td>" . $index . "</td>",
 			"<td>
 				<a href='traitement.php?action=delete&index=$index'>Supprimer</a>
 			</td>", //le lien pour suprimer les produits
 			"<td>" . $product['name'] . "</td>",
-				//"<td>" . $product['price'] . "</td>",  comme c'est nombre en utilise le format 
+			//"<td>" . $product['price'] . "</td>",  comme c'est nombre en utilise le format 
 			"<td>" . number_format($product['price'], 2, ",", "&nbsp;") . "&nbsp;€" . "</td>",
-			"<td>" . 
-				"<a href='traitement.php?action=decrease&index=$index'>-</a> " 
-				. $product['qtt'] . 
+			"<td>" .
+				"<a href='traitement.php?action=decrease&index=$index'>-</a> "
+				. $product['qtt'] .
 				" <a href='traitement.php?action=increase&index=$index'>+</a>
 			</td>",
-				//"<td>" . $product['total'] . "</td>",
-			"<td>" 
-				. number_format($product['total'], 2, ",", "&nbsp;") . "&nbsp;€" . 
-			"</td>",
-		"</tr>";
+			//"<td>" . $product['total'] . "</td>",
+			"<td>"
+				. number_format($product['total'], 2, ",", "&nbsp;") . "&nbsp;€" .
+				"</td>",
+			"</tr>";
 
 			$totalGeneral += $product['total'];
 			/**
@@ -105,16 +105,16 @@ if (isset($_SESSION['products'])) {
 			 */
 			$qqtGenaral += $product['qtt'];
 		}
-			echo 
-				"<tr>",
-					"<td colspan=5> Total général : </td>",
-					//"<td  >".$qqtGenaral."</td>",
-					"<td>
+		echo
+		"<tr>",
+		"<td colspan=5> Total général : </td>",
+		//"<td  >".$qqtGenaral."</td>",
+		"<td>
 						<strong>" . number_format($totalGeneral, 2, ",", "&nbsp;") . "&nbsp;€</strong>
 					</td>",
-				"</tr>",
+		"</tr>",
 		"</tbody>",
-	"</table>";;
+		"</table>";;
 	};
 
 	?>

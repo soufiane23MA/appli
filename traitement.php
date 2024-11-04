@@ -145,10 +145,19 @@ if (isset($_GET['action'])) {
 		case 'decrease':
 			if (isset($_GET['action']) && $_GET['action'] == 'decrease' && isset($_GET['index'])) {
 				$index = (int) $_GET['index'];
-				if (isset($_SESSION['products'][$index]) && $_SESSION['products'][$index]['qtt'] > 1) {
+				if (isset($_SESSION['products'][$index]) && $_SESSION['products'][$index]['qtt'] >= 1) {
 					$_SESSION['products'][$index]['qtt']--;
-					$_SESSION['products'][$index]['total'] = $_SESSION['products'][$index]['qtt'] * $_SESSION['products'][$index]['price'];
-					$_SESSION['message'] = "<h3 style='color:red'> Votre produit a été bien supprimé </h3>.";
+					if($_SESSION['products'][$index]['qtt'] <= 0){
+						unset($_SESSION['products'][$index]);
+						$_SESSION['products'] = array_values($_SESSION['products']);
+					}
+					else{
+						$_SESSION['products'][$index]['total'] = $_SESSION['products'][$index]['qtt'] * $_SESSION['products'][$index]['price'];
+					//$_SESSION['message'] = "<h3 style='color:red'> Votre produit a été bien supprimé </h3>.";
+
+					}
+					
+					
 				}
 			}
 			break; 
@@ -161,7 +170,7 @@ if (isset($_GET['action'])) {
 				if (isset($_SESSION['products'][$index])) {
 					$_SESSION['products'][$index]['qtt']++;
 					$_SESSION['products'][$index]['total'] = $_SESSION['products'][$index]['qtt'] * $_SESSION['products'][$index]['price'];
-					$_SESSION['message'] = "<h3 style='color:green'>Votre produit a été bien rajouté</h3>";
+					//$_SESSION['message'] = "<h3 style='color:green'>Votre produit a été bien rajouté</h3>";
 				}
 
 			}
